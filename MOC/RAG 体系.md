@@ -24,6 +24,16 @@ tags:
 - [[openUBMC RAG对外查询接口-架构设计说明书]] — 对外查询接口架构
 - [[RAG对外API使用说明]] — 外部接入文档
 
+## 测试方案
+
+- [[Issue-785-921-联合测试方案]] — #785 + #921 联合测试 (20 项验收)
+- [[Issue-921-安全测试方案]] — OIDC / 限流 / 透传安全测试 (27 用例)
+- [[2026-06-26-backlog-issue785-测试方案]] — #785 阶段一测试方案 (175 用例)
+
+## LightRAG 参考
+
+- [[LightRAG_API_Documentation]] — LightRAG 原生 API 完整文档（/query vs /query/data 差异溯源）
+
 ## 相关服务
 
 - [[机器人类-forum-reply-robot]] — 服务概览

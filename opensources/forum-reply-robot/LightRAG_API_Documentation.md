@@ -1,3 +1,11 @@
+---
+tags:
+  - LightRAG
+  - API文档
+  - RAG
+  - 参考
+---
+
 # LightRAG API 文档
 
 > 基于 `lightrag-cn4.test.osinfra.cn` 的 OpenAPI 规范分析生成。
@@ -750,3 +758,14 @@ LightRAG 服务包含部分 Ollama API 兼容接口。
 **包含完整的检索数据，从 `data.chunks` 路径访问，这正是 `forum_client.py` 内部使用的路径。**
 
 > **当前 `rag_api.py` 的问题**: `retrieve()` 方法调 `/query` 并从 `response['context']['chunks']` 取数据——但这个路径在 LightRAG 的 `/query` 响应中**根本不存在**。`/query` 不返回 `context` 字段。应改为调 `/query/data` 并从 `response['data']['chunks']` 取数据。
+
+---
+
+## 🔗 相关笔记
+
+- [[openUBMC RAG对外查询接口-架构设计说明书]] — RAG API 架构（LightRAG 是后端）
+- [[RAG对外API使用说明]] — RAG API 封装层使用说明
+- [[Issue-785-921-联合测试方案]] — 透传测试引用 LightRAG /query 对照
+- [[搜索服务类]] — LightRAG 服务分类
+
+> 索引：[[RAG 体系]] · 返回 [[首页]]

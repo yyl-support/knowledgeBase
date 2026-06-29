@@ -1,3 +1,13 @@
+---
+tags:
+  - issue-785
+  - 测试
+  - 评估
+  - Prometheus
+  - forum-reply-robot
+issue: 785
+---
+
 # Issue #785 测试方案 — 阶段一：评估插桩与基线建设
 
 **关联 Issue**: https://github.com/opensourceways/backlog/issues/785
@@ -417,3 +427,14 @@ curl http://localhost:5000/health
 | 回归测试 | 25 |
 | 验收测试 | 10 |
 | **合计** | **175** |
+
+---
+
+## 🔗 相关笔记
+
+- [[Issue-785-921-联合测试方案]] — #785 + #921 联合测试（共享 /metrics 测试）
+- [[2026-06-10-forum-reply-robot-阶段一-评估插桩与基线建设]] — 本方案对应的阶段一设计文档
+- [[2026-06-16-forum-reply-robot-pr113-unit-test-fail]] — PR#113 单测故障（本方案涉及修改）
+- [[机器人类-forum-reply-robot]] — 服务概览
+
+> 索引：[[RAG 体系]] · [[Issue 专题]] · 返回 [[首页]]

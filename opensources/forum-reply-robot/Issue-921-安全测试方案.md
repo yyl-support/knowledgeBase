@@ -1,3 +1,13 @@
+---
+tags:
+  - issue-921
+  - 安全
+  - 测试
+  - RAG
+  - forum-reply-robot
+issue: 921
+---
+
 # Issue #921 openUBMC RAG API — 安全测试方案
 
 > 测试环境：`https://lightrag-cn4.test.osinfra.cn`（根据实际部署调整）
@@ -327,3 +337,14 @@ curl -s $BASE/health | python3 -m json.tool
 ---
 
 > 更新日期: 2026-06-25 | 修改说明: 删除 RBAC 及 upload 测试，新增 3 个透传接口测试
+
+---
+
+## 🔗 相关笔记
+
+- [[Issue-785-921-联合测试方案]] — 功能测试方案（互补）
+- [[issue-921-OIDC认证完整机制]] — OIDC 认证机制（安全测试基础）
+- [[Issue-921-测试命令]] — curl 测试命令
+- [[openUBMC RAG对外查询接口-架构设计说明书]] — 架构设计中包含安全设计清单
+
+> 索引：[[RAG 体系]] · [[Issue 专题]] · 返回 [[首页]]
