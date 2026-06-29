@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/2026-06-09/backlog-architecture.md",
-                "mode": "preview",
+                "file": "MOC/认证与安全.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "backlog-architecture"
+              "title": "认证与安全"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "d7313821993c92cc",
@@ -156,21 +156,31 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "0519-RAG切换.md",
+                "file": "MOC/认证与安全.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "0519-RAG切换 的大纲"
+              "title": "认证与安全 的大纲"
+            }
+          },
+          {
+            "id": "457d0dcf7c84c2db",
+            "type": "leaf",
+            "state": {
+              "type": "opencode-view",
+              "state": {},
+              "icon": "opencode-logo",
+              "title": "OpenCode"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 413.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,23 +190,50 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "bases:新建数据库": false,
+      "obsidian42-brat:BRAT": false,
+      "opencode:OpenCode Terminal": false,
+      "opencode:OpenCode Conversations": false,
+      "opencode-obsidian:OpenCode": false
     }
   },
   "active": "74b7549cb98c8be1",
   "lastOpenFiles": [
-    "doc/2026-06-09/backlog-architecture.md",
-    "doc/2026-06-09",
-    "CLAUDE.md",
-    "plan/0519-RAG切换.md",
-    "plan/0519/0519-RAG切换.md",
-    "plan/0519",
-    "plan/未命名文件夹",
-    "knowledge",
+    "opensources/forum-reply-robot/Issue-785-921-联合测试方案.md",
+    "other/2026-06-26-backlog-issue785-测试方案.md",
+    "opensources/forum-reply-robot/LightRAG_API_Documentation.md",
+    "opensources/forum-reply-robot/Issue-921-安全测试方案.md",
+    "首页.md",
+    "opensources/README.md",
+    "knowledge/密钥与凭据管理.md",
+    "欢迎.md",
+    "MOC/服务总览.md",
+    "MOC/认证与安全.md",
+    "MOC/错误库.md",
+    "MOC/基础设施.md",
+    "MOC/RAG 体系.md",
+    "MOC/ai-flow 体系.md",
+    "opensources/forum-reply-robot/Issue-921-测试命令.md",
+    "MOC/Issue 专题.md",
+    "MOC",
+    "opensources/issue-921-RAG对外域名全链路.md",
+    "opensources/issue-921-OIDC认证完整机制.md",
+    "opensources/issue-921-helm改动对比分析.md",
+    "opensources/forum-reply-robot/RAG API 测试环境联调指南.md",
+    "opensources/forum-reply-robot/RAG对外API使用说明.md",
+    "error/2026-06-23-codearts-ci-config-pytest_asyncio导入FixtureDef失败.md",
+    "opensources/分类概览/中台类-APIMagic.md",
+    "opensources/基础设施类/integration-tests-集成测试.md",
+    "opensources/forum-reply-robot/openUBMC RAG对外查询接口-架构设计说明书.md",
+    "opensources/forum-reply-robot/vault-config-新增段.yaml",
+    "opensources/术语解释.md",
+    "opensources/forum-reply-robot",
+    "doc/2026-06-17",
+    "opensources/ai-flow串联",
+    "opensources/基础设施类",
+    "opensources/分类概览",
+    "opensources",
     "未命名文件夹",
-    "spec",
-    "doc",
-    "plan",
-    "欢迎.md"
+    "error"
   ]
 }

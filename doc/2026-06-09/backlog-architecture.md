@@ -1,3 +1,10 @@
+---
+tags:
+  - ai-flow
+  - backlog
+  - 架构
+---
+
 # backLog 工程架构解读 —— 聚焦 .ai-flow 运行机制
 
 > 解读时间：2026-06-09
@@ -407,3 +414,16 @@ package.json   → npm ci → npm test
 | `scripts/add_service.py` | 391 | 新服务接入脚手架 |
 | `services/_TEMPLATE.yaml` | 82 | 服务接入模板（三段式） |
 | `services/meeting-server.yaml` | 128 | 最完整的全栈服务配置示例 |
+
+---
+
+## 🔗 相关笔记
+
+- [[backlog-ai-flow-commands]] — 三阶段斜杠命令系统（互补）
+- [[术语解释]] — 架构中术语的定义字典
+- [[backlog-issue-3-release-architecture]] — 发布工作流架构细节
+- [[ai-flow如何串联全组织]] — ai-flow 全组织串联全景
+- [[local-debug-本地调试体系]] — 本地直调 orchestrate.sh
+- [[平台类-backlog]] — backlog 服务定位
+
+> 索引：[[ai-flow 体系]] · 返回 [[首页]]

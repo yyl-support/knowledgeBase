@@ -1,0 +1,63 @@
+# ═════════════════════════════════════════
+# 测试环境
+# ═════════════════════════════════════════
+
+flask_secret_key: "b02ecbd20743ccc94a96380c4ab43af1c63a312834d790c3e0a035389e49e2ce"
+
+oidc:
+  client_id: ""
+  client_secret: ""
+  authorize_url: "https://omapi.osinfra.cn/oneid/oidc/authorize"
+  token_url: "https://omapi.osinfra.cn/oneid/oidc/token"
+  userinfo_url: "https://omapi.osinfra.cn/oneid/oidc/user"
+  scope: "openid profile"
+  redirect_uri: ""
+
+rate_limit:
+  user_hourly_limit: 100
+  window_seconds: 3600
+
+retrieval:
+  base_url: "https://lightrag-cn4.test.osinfra.cn"
+  query_endpoint: "/query"
+  verify_ssl: true
+
+database:
+  host: "${DB_HOST}"
+  port: 5432
+  database: "${DB_NAME}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  sslmode: "prefer"
+
+# ═════════════════════════════════════════
+# 正式环境
+# ═════════════════════════════════════════
+
+flask_secret_key: ""
+
+oidc:
+  client_id: ""
+  client_secret: ""
+  authorize_url: "https://omapi.osinfra.cn/oneid/oidc/authorize"
+  token_url: "https://omapi.osinfra.cn/oneid/oidc/token"
+  userinfo_url: "https://omapi.osinfra.cn/oneid/oidc/user"
+  scope: "openid profile"
+  redirect_uri: "https://rag.openubmc.cn/api/v1/rag/auth/callback"
+
+rate_limit:
+  user_hourly_limit: 100
+  window_seconds: 3600
+
+retrieval:
+  base_url: ""
+  query_endpoint: "/query"
+  verify_ssl: true
+
+database:
+  host: "${DB_HOST}"
+  port: 5432
+  database: "${DB_NAME}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  sslmode: "prefer"
