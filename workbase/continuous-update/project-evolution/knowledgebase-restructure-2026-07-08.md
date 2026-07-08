@@ -84,6 +84,6 @@ knowledgeBase/
 
 ## 六、todo-list 接入 day-planner（说明）
 
-1. 在 Obsidian「设置 → 第三方插件」中安装并启用 **Day Planner**（https://github.com/ivan-lednev/obsidian-day-planner）。
-2. 每日笔记路径模板设为 `workbase/todo-list/{{date:YYYY/MM/DD}}`。
-3. 每天在当日 todo 文件中用 `- HH:MM 任务` 的格式记录，插件会自动关联时间轴/日历。
+1. **Day Planner** 插件已安装并启用（v0.31.0，https://github.com/ivan-lednev/obsidian-day-planner）。
+2. 核心「Daily Notes」插件已配置（`.obsidian/daily-notes.json`）：文件夹 `workbase/todo-list`、日期格式 `YYYY/MM/DD/YYYY-MM-DD`，即每日笔记落在 `workbase/todo-list/年/月/日/年-月-日.md`。Day Planner 直接读取该设置。
+3. 每天在当日 todo 文件中用 `- HH:MM - HH:MM 任务` 的格式记录，插件会自动关联时间轴/日历。
