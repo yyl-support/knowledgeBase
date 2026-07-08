@@ -1,0 +1,30 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="openai" />
+          <option value="langchain-openai" />
+          <option value="langchain-core" />
+          <option value="httpx" />
+          <option value="requests" />
+          <option value="beautifulsoup4" />
+          <option value="PyYAML" />
+          <option value="pandas" />
+          <option value="flask" />
+          <option value="werkzeug" />
+          <option value="pytz" />
+          <option value="psycopg2-binary" />
+          <option value="python-json-logger" />
+          <option value="python-dotenv" />
+          <option value="retrying" />
+          <option value="urllib3" />
+          <option value="schedule" />
+          <option value="netifaces" />
+          <option value="gitpython" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

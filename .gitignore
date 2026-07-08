@@ -1,1 +1,8 @@
 .DS_Store
+# Sensitive credentials - excluded from KB
+sk-*.ps1
+*kubeconfig*
+# Obsidian workspace (auto-generated)
+.obsidian/workspace.json
+# Binary files
+*.xlsx
