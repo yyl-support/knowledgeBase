@@ -136,21 +136,18 @@ codearts-workflow-image
 │     • 纯 CPU 无 PVC → 按默认 PropagationPolicy 分发
 │  4. Karmada 根据 label + policy 分发到目标 member 集群
 │
-├─────────────────────────────────────┐
-│                                     │
-▼                                     ▼
-image_preheat                       cronjob
-│                                     │
-│  Harbor push 镜像                   │  • patch.py: 修复卡在
-│  → webhook 触发                     │    SchedulerError 的
-│  → 通过 Karmada Proxy 对所有        │    ResourceBinding
-│    member 集群的 Node 预拉取镜像     │  • clean.py: TTL 后删除
-│                                     │    终端 VCJob，输出 wlcb
-│                                     │    集群 NPU 资源摘要
-│                                     │
-└──────────────┬──────────────────────┘
-               │
-               ▼
+├──► image_preheat
+│      │  Harbor push 镜像
+│      │  → webhook 触发
+│      │  → 通过 Karmada Proxy 对所有 member 集群的 Node 预拉取镜像
+│
+└──► cronjob
+       │  • patch.py: 修复卡在 SchedulerError 的 ResourceBinding
+       │  • clean.py: TTL 后删除终端 VCJob，输出 wlcb 集群 NPU 资源摘要
+
+（两分支汇合）
+                │
+                ▼
 Karmada 多集群联邦
 │
 ├── 测试环境 ( 控制面: 1.95.134.239 )

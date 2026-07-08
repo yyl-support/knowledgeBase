@@ -117,51 +117,37 @@ monitor._process_new_topics()        → 组装 EvaluationSample 写入 PostgreS
 这是pgvector影子管道的技术架构——**不是对现有代码的重构，而是新管道的蓝图**。
 
 ```
-                      ┌─────────────┐
-                      │  用户问题    │
-                      └──────┬──────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │       [接入层] DataIngestion            │
-        │  - 问题文本归一化                         │
-        │  - 问题类型分类（技术/使用/规则）            │
-        │  输入: str                               │
-        │  输出: QueryInput(text, category)        │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │       [检索层] RetrievalLayer            │
-        │  ┌─────────────────┐ ┌────────────────┐ │
-        │  │ VectorRetriever  │ │  BM25Retriever │ │
-        │  │ (dense/语义)     │ │  (sparse/关键词) │ │
-        │  │ Qwen3-Emb-0.6B  │ │  PostgreSQL     │ │
-        │  │ + pgvector HNSW │ │  ts_rank        │ │
-        │  └────────┬────────┘ └───────┬────────┘ │
-        │           └────────┬─────────┘          │
-        │  输入: QueryInput                        │
-        │  输出: RetrievalCandidates(dense[], sparse[]) │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │       [处理层] ProcessingLayer           │
-        │  ┌─────────────────┐ ┌────────────────┐ │
-        │  │  RRFFusion      │ │   Reranker     │ │
-        │  │  (k=60)         │ │   (BGE-Reranker│ │
-        │  │  融合dense+     │ │    v2-m3 或    │ │
-        │  │  sparse排序      │ │    SiliconFlow │ │
-        │  └────────┬────────┘ │   rerank API)  │ │
-        │           └──────────┴───────┬────────┘ │
-        │  输入: RetrievalCandidates               │
-        │  输出: RerankedResults(top_k=5)          │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │       [生成层] GenerationLayer            │
-        │  - Prompt 组装（复用现有模板）              │
-        │  - 调用 SiliconFlow API（与线上同模型）     │
-        │  输入: RerankedResults                    │
-        │  输出: GeneratedAnswer                    │
-        └────────────────────┴────────────────────┘
+  用户问题
+    │
+    ▼
+[接入层] DataIngestion
+  - 问题文本归一化
+  - 问题类型分类（技术/使用/规则）
+  - 输入: str
+  - 输出: QueryInput(text, category)
+    │
+    ▼
+[检索层] RetrievalLayer
+  ├── VectorRetriever (dense/语义)
+  │     Qwen3-Emb-0.6B + pgvector HNSW
+  └── BM25Retriever (sparse/关键词)
+        PostgreSQL ts_rank
+  - 输入: QueryInput
+  - 输出: RetrievalCandidates(dense[], sparse[])
+    │
+    ▼
+[处理层] ProcessingLayer
+  ├── RRFFusion (k=60) 融合 dense + sparse 排序
+  └── Reranker (BGE-Reranker-v2-m3 或 SiliconFlow rerank API)
+  - 输入: RetrievalCandidates
+  - 输出: RerankedResults(top_k=5)
+    │
+    ▼
+[生成层] GenerationLayer
+  - Prompt 组装（复用现有模板）
+  - 调用 SiliconFlow API（与线上同模型）
+  - 输入: RerankedResults
+  - 输出: GeneratedAnswer
 ```
 
 **各层接口契约**（Pydantic model）：

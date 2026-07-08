@@ -325,48 +325,38 @@ codearts-workflow-image/
 ## 11. 架构全景
 
 ```
-┌──────────────────────────────────────────────────┐
-│                    输入                           │
-│  shell.sh     (用户 CI/CD 脚本)                   │
-│  env.sh       (CP_* 配置 + 用户环境变量)          │
-│  workflow_templatev2.yaml (Volcano Job 模板)      │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│  转换器 (convert_to_yaml)                         │
-│                                                   │
-│  GetCPConfig() → 提取 CP_* 变量                   │
-│  ConvertScriptToVolcano() → 组装 Volcano Job      │
-│   ├── 生成 Git 克隆脚本（带 CDN 缓存）             │
-│   ├── 生成延迟退出 trap                           │
-│   ├── 生成产物复制脚本                             │
-│   ├── 计算资源（CPU/内存/NPU）                     │
-│   ├── 设置 NodeSelector + NPU 亲和性              │
-│   ├── 处理环境变量（筛选敏感/解析引用）            │
-│   ├── 构建卷（dataset, ascend-driver, shm）       │
-│   └── 添加 Sidecar + 标签 + 注解                  │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│                    输出                           │
-│  workflow.yaml          (Volcano Job CRD)         │
-│  workflow-secret.yaml   (K8s Secret，可选)         │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│  提交器 (submit)                                  │
-│                                                   │
-│  ├── 预提交验证（Harbor/Git/队列/芯片/PVC）        │
-│  ├── 添加 Karmada 调度标签                        │
-│  ├── kubectl create + Secret 注入                 │
-│  ├── 等待 Pod + 日志流                            │
-│  ├── 检测镜像拉取失败                             │
-│  ├── 产物提取 (kubectl cp)                        │
-│  └── 清理                                         │
-└──────────────────────────────────────────────────┘
+输入
+├── shell.sh     (用户 CI/CD 脚本)
+├── env.sh       (CP_* 配置 + 用户环境变量)
+└── workflow_templatev2.yaml (Volcano Job 模板)
+  │
+  ▼
+转换器 (convert_to_yaml)
+├── GetCPConfig() → 提取 CP_* 变量
+└── ConvertScriptToVolcano() → 组装 Volcano Job
+    ├── 生成 Git 克隆脚本（带 CDN 缓存）
+    ├── 生成延迟退出 trap
+    ├── 生成产物复制脚本
+    ├── 计算资源（CPU/内存/NPU）
+    ├── 设置 NodeSelector + NPU 亲和性
+    ├── 处理环境变量（筛选敏感/解析引用）
+    ├── 构建卷（dataset, ascend-driver, shm）
+    └── 添加 Sidecar + 标签 + 注解
+  │
+  ▼
+输出
+├── workflow.yaml          (Volcano Job CRD)
+└── workflow-secret.yaml   (K8s Secret，可选)
+  │
+  ▼
+提交器 (submit)
+├── 预提交验证（Harbor/Git/队列/芯片/PVC）
+├── 添加 Karmada 调度标签
+├── kubectl create + Secret 注入
+├── 等待 Pod + 日志流
+├── 检测镜像拉取失败
+├── 产物提取 (kubectl cp)
+└── 清理
 ```
 
 ---

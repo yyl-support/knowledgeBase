@@ -29,7 +29,7 @@ knowledgeBase/
 │   ├── industry-insight/       # 业界文章 / 论坛分享
 │   └── other/                  # 其他暂未分类
 └── workbase/                   # 【每日工作】
-    ├── todo-list/              # 每日工作项，按 年/月/日；可接入 day-planner 插件并关联日历
+    ├── todo-list/              # 每日工作项，按 年/月；可接入 day-planner 插件并关联日历
     ├── daliy-works/            # 当天的问题分析 / 工作分析，按 年/月/日
     ├── continuous-update/      # 会持续覆写更新的工作，按任务类型归类
     │   ├── issue-analysis/     #   针对某 issue 的分析
@@ -85,5 +85,5 @@ knowledgeBase/
 ## 六、todo-list 接入 day-planner（说明）
 
 1. **Day Planner** 插件已安装并启用（v0.31.0，https://github.com/ivan-lednev/obsidian-day-planner）。
-2. 核心「Daily Notes」插件已配置（`.obsidian/daily-notes.json`）：文件夹 `workbase/todo-list`、日期格式 `YYYY/MM/DD/YYYY-MM-DD`，即每日笔记落在 `workbase/todo-list/年/月/日/年-月-日.md`。Day Planner 直接读取该设置。
+2. 核心「Daily Notes」插件已配置（`.obsidian/daily-notes.json`）：文件夹 `workbase/todo-list`、日期格式 `YYYY/MM/YYYY-MM-DD`，即每日笔记落在 `workbase/todo-list/年/月/年-月-日.md`。Day Planner 直接读取该设置。
 3. 每天在当日 todo 文件中用 `- HH:MM - HH:MM 任务` 的格式记录，插件会自动关联时间轴/日历。

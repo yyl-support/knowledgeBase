@@ -307,13 +307,20 @@ docs/api/
 APIMagic 作为数据统计中台，被多个前台系统消费：
 
 ```
-openEuler 社区看板 ──┐
-Ascend 看板 ─────────┤
-CANN 社区看板 ────────┤
-MindSpore 看板 ───────┼──→ APIMagic (275 API) ──→ PostgreSQL
-openUBMC 看板 ────────┤
-管理后台 ─────────────┤
-第三方集成 ────────────┘
+消费方（多个前台系统）
+├── openEuler 社区看板
+├── Ascend 看板
+├── CANN 社区看板
+├── MindSpore 看板
+├── openUBMC 看板
+├── 管理后台
+└── 第三方集成
+        │
+        ▼
+APIMagic (275 API)
+        │
+        ▼
+PostgreSQL
 ```
 
 **消费方追踪**：`api_consumers.json` 映射 API 路径 → 消费系统列表

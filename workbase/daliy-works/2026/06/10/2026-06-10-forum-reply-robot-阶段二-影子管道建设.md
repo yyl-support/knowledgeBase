@@ -62,47 +62,33 @@ issue: 621
 ### 1. 四层架构（新管道的结构）
 
 ```
-                      ┌─────────────┐
-                      │  QueryInput  │
-                      │  .text       │
-                      │  .category   │
-                      └──────┬──────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │          DataIngestion                   │
-        │  输入: str                                │
-        │  输出: QueryInput(text, category)         │
-        │  行为: 文本归一化 + 类别标注               │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │          RetrievalLayer                  │
-        │  ┌───────────────┐  ┌────────────────┐  │
-        │  │VectorRetriever│  │ BM25Retriever  │  │
-        │  │ (dense)       │  │ (sparse)       │  │
-        │  │ pgvector HNSW │  │ pg ts_rank     │  │
-        │  └───────┬───────┘  └───────┬────────┘  │
-        │          └─────────┬────────┘            │
-        │  输出: RetrievalCandidates(dense, sparse) │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │          ProcessingLayer                 │
-        │  ┌───────────────┐  ┌────────────────┐  │
-        │  │  RRFFusion    │  │   Reranker     │  │
-        │  │  k=60         │  │   BGE-Reranker │  │
-        │  │               │  │   或API rerank  │  │
-        │  └───────┬───────┘  └───────┬────────┘  │
-        │          └─────────┬────────┘            │
-        │  输出: RerankedResults(candidates[:5])    │
-        └────────────────────┬────────────────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │          GenerationLayer                 │
-        │  - Prompt 组装（复用现有PROMPT_TEMPLATE）  │
-        │  - SiliconFlow API 调用（与线上同模型）    │
-        │  输出: GeneratedAnswer(text, tokens, ms)  │
-        └────────────────────┴────────────────────┘
+  QueryInput
+    .text
+    .category
+    │
+    ▼
+DataIngestion
+  - 输入: str
+  - 输出: QueryInput(text, category)
+  - 行为: 文本归一化 + 类别标注
+    │
+    ▼
+RetrievalLayer
+  ├── VectorRetriever (dense) — pgvector HNSW
+  └── BM25Retriever (sparse) — pg ts_rank
+  - 输出: RetrievalCandidates(dense, sparse)
+    │
+    ▼
+ProcessingLayer
+  ├── RRFFusion (k=60)
+  └── Reranker (BGE-Reranker 或 API rerank)
+  - 输出: RerankedResults(candidates[:5])
+    │
+    ▼
+GenerationLayer
+  - Prompt 组装（复用现有PROMPT_TEMPLATE）
+  - SiliconFlow API 调用（与线上同模型）
+  - 输出: GeneratedAnswer(text, tokens, ms)
 ```
 
 ### 2. 接口契约（Pydantic model）

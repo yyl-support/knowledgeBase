@@ -254,20 +254,21 @@ robot-ingress.yaml → Ingress: RAG 入口            (新增)
 ## 五、改动前后对比图示
 
 ```
-【改动前】                          【改动后】
+【改动前】k8s resource
+├── web-server (Deployment)
+│   ├── Service
+│   └── Ingress
+└── forum-robot (Deployment)
+    ├── Service ❌  ← 缺失
+    └── Ingress ❌  ← 缺失
 
-k8s resource                       k8s resource
-┌────────────────┐                  ┌────────────────┐
-│ web-server     │                  │ web-server     │
-│ Deployment     │                  │ Deployment     │
-│  ├─ Service    │                  │  ├─ Service    │
-│  └─ Ingress    │                  │  └─ Ingress    │
-│                │                  │                │
-│ forum-robot    │                  │ forum-robot    │
-│ Deployment     │                  │ Deployment     │
-│  ├─ Service ❌ │  ← 缺失          │  ├─ Service ✓  │  ← 新增
-│  └─ Ingress ❌ │  ← 缺失          │  └─ Ingress ✓  │  ← 新增
-└────────────────┘                  └────────────────┘
+【改动后】k8s resource
+├── web-server (Deployment)
+│   ├── Service
+│   └── Ingress
+└── forum-robot (Deployment)
+    ├── Service ✓  ← 新增
+    └── Ingress ✓  ← 新增
 ```
 
 ---

@@ -109,7 +109,7 @@ flowchart TD
 ```
 design → dev → deploy → tester（冒烟）→ 回评预览
    │                              │
-   └── 设计 PR 并行自动评审 ──────┘
+    └── 设计 PR 并行自动评审
 ```
 - 快速出一个能跑的预览让人看，不开代码 PR
 - 冒烟只做 1 轮 best-effort

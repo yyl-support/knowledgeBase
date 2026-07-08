@@ -29,36 +29,37 @@ tags:
 ## 完整使用流程：从本地调试到远端生效
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│               本地调试 → 远端生效 全流程                       │
-├──────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ① 本地修改 backlog 仓的脚本                                    │
-│     改了 .ai-flow/src/orchestrate.sh / scripts/ / services/ 等    │
-│                                                               │
-│  ② 本地验证                                                   │
-│     bash docs/local-debug/local-debug.sh setup <调试issue号> ...   │
-│     bash docs/local-debug/local-debug.sh design                │
-│     → 调试器用你本地改过的脚本跑，看到产物对不对                  │
-│                                                               │
-│  ③ 本地确认无误                                               │
-│     检查 ~/issue2-debug/ai/design.md / git diff / 终端输出        │
-│                                                               │
-│  ④ 手动推送到远端（仅限 backlog 仓库）                           │
-│     cd /你的/backlog/仓库                                       │
-│     git add .ai-flow/src/ scripts/ services/                    │
-│     git commit -m "fix: 说明你的改动"                            │
-│     git push origin main                                       │
-│                                                               │
-│  ⑤ 远端 CI 自动用你的新脚本（零漂移的根基）                      │
-│     GitHub Actions 触发 → rm -rf + 全新 clone → 拉到最新 main    │
-│     → 跑的就是你刚刚推的那份脚本                                 │
-│                                                               │
-│  ⑥ 远端确认（可选）                                            │
-│     对调试 issue 评论 /ai-develop-preview 触发线上跑            │
-│     看 Actions run 结果——和本地跑同一份逻辑 ✅                   │
-│                                                               │
-└──────────────────────────────────────────────────────────────┘
+本地调试 → 远端生效 全流程
+────────────────────────────
+
+① 本地修改 backlog 仓的脚本
+   改了 .ai-flow/src/orchestrate.sh / scripts/ / services/ 等
+
+② 本地验证
+   bash docs/local-debug/local-debug.sh setup <调试issue号> ...
+   bash docs/local-debug/local-debug.sh design
+   → 调试器用你本地改过的脚本跑，看到产物对不对
+
+▼
+③ 本地确认无误
+   检查 ~/issue2-debug/ai/design.md / git diff / 终端输出
+
+▼
+④ 手动推送到远端（仅限 backlog 仓库）
+   cd /你的/backlog/仓库
+   git add .ai-flow/src/ scripts/ services/
+   git commit -m "fix: 说明你的改动"
+   git push origin main
+
+▼
+⑤ 远端 CI 自动用你的新脚本（零漂移的根基）
+   GitHub Actions 触发 → rm -rf + 全新 clone → 拉到最新 main
+   → 跑的就是你刚刚推的那份脚本
+
+▼ (可选)
+⑥ 远端确认
+   对调试 issue 评论 /ai-develop-preview 触发线上跑
+   看 Actions run 结果——和本地跑同一份逻辑 ✅
 ```
 
 **核心原理**：线上 CI 每一步都是 `rm -rf $WORK_DIR && git clone`（全新拉取），所以你 push 到远端后，下一次触发就能拿到你的改动。

@@ -205,19 +205,19 @@ curl -X POST https://rag.openubmc.cn/api/v1/rag/knowledge/upload \
 ### 端到端流程
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  Step 1          Step 2         Step 3          Step 4+5        │
-│  发起认证         用户授权        换取 token       使用 API        │
-│                                                                 │
-│  你的程序         用户浏览器      RAG 服务端       你的程序        │
-│  ─────────       ─────────      ──────────       ──────────      │
-│  调 /authorize → 跳转 OneID → 回调 /callback →  拿到 token →    │
-│                  登录+授权      用 code 换       tokenize/       │
-│                                 access_token     retrieve/       │
-│                                 +refresh_token   upload          │
-│                                                  ↓              │
-│                              token 过期 → 调 /refresh 换新的     │
-└─────────────────────────────────────────────────────────────────┘
+Step 1 · 发起认证（你的程序）
+    调 /authorize
+    ↓
+Step 2 · 用户授权（用户浏览器）
+    跳转 OneID → 登录 + 授权
+    ↓
+Step 3 · 换取 token（RAG 服务端）
+    回调 /callback → 用 code 换 access_token + refresh_token
+    ↓
+Step 4+5 · 使用 API（你的程序）
+    拿到 token → tokenize / retrieve / upload
+    ↓
+token 过期 → 调 /refresh 换新的
 ```
 
 ---
