@@ -1,0 +1,26 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"recsdk-namespace-propagation"},"spec":{"conflictResolution":"Overwrite","placement":{"clusterAffinity":{"clusterNames":["001","wlcb"]},"replicaScheduling":{"replicaSchedulingType":"Duplicated"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"v1","kind":"Namespace","name":"recsdk"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 2ac1ba69-46ed-4945-b6d2-6526ce917082
+  name: recsdk-namespace-propagation
+spec:
+  conflictResolution: Overwrite
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+      - wlcb
+    replicaScheduling:
+      replicaSchedulingType: Duplicated
+  preemption: Never
+  priority: 0
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Namespace
+    name: recsdk
+  schedulerName: default-scheduler

@@ -1,0 +1,35 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"non-npu-vcjob-prefer-001"},"spec":{"conflictResolution":"Abort","placement":{"clusterAffinities":[{"affinityName":"prefer-cpu-cluster","clusterNames":["001"]},{"affinityName":"fallback-npu-cluster","clusterNames":["wlcb"]}],"replicaScheduling":{"replicaDivisionPreference":"Aggregated","replicaSchedulingType":"Divided"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchExpressions":[{"key":"huawei.com/ascend-1980","operator":"DoesNotExist"},{"key":"huawei.com/ascend-310","operator":"DoesNotExist"}]}}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 1c695d52-ac74-4510-88ca-c6c710c57c81
+  name: non-npu-vcjob-prefer-001
+spec:
+  conflictResolution: Abort
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+    replicaScheduling:
+      replicaDivisionPreference: Aggregated
+      replicaSchedulingType: Divided
+  preemption: Never
+  priority: 20
+  resourceSelectors:
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: huawei.com/npu
+        operator: DoesNotExist
+  - apiVersion: batch/v1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: huawei.com/npu
+        operator: DoesNotExist
+  schedulerName: default-scheduler

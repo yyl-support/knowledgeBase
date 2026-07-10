@@ -1,0 +1,27 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"ragsdk-namespace-propagation"},"spec":{"conflictResolution":"Overwrite","placement":{"clusterAffinity":{"clusterNames":["001","wlcb"]},"replicaScheduling":{"replicaSchedulingType":"Duplicated"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"v1","kind":"Namespace","name":"pytorch"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 92ebaa47-e4a6-48ce-9228-126a12de2fd8
+    k8slens-edit-resource-version: v1alpha1
+  name: ragsdk-namespace-propagation
+spec:
+  conflictResolution: Overwrite
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+      - wlcb
+    replicaScheduling:
+      replicaSchedulingType: Duplicated
+  preemption: Never
+  priority: 0
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Namespace
+    name: ragsdk
+  schedulerName: default-scheduler

@@ -1,0 +1,30 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"PropagationPolicy","metadata":{"annotations":{},"name":"argo-npuir-policy","namespace":"argo"},"spec":{"conflictResolution":"Abort","placement":{"clusterAffinity":{"clusterNames":["wlcb"]},"replicaScheduling":{"replicaDivisionPreference":"Aggregated","replicaSchedulingType":"Divided"}},"preemption":"Never","priority":20,"resourceSelectors":[{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchLabels":{"jobRepositoryName":"ascend-ascendnpu-ir"}},"namespace":"argo"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/propagation-policy-controller
+  labels:
+    propagationpolicy.karmada.io/permanent-id: bc0f038c-8a2f-48d6-85c8-33bdec5386f1
+  name: argo-npuir-policy
+  namespace: argo
+spec:
+  conflictResolution: Abort
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - wlcb
+    replicaScheduling:
+      replicaDivisionPreference: Aggregated
+      replicaSchedulingType: Divided
+  preemption: Never
+  priority: 20
+  resourceSelectors:
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchLabels:
+        jobRepositoryName: ascend-ascendnpu-ir
+    namespace: argo
+  schedulerName: default-scheduler

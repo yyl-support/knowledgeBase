@@ -1,0 +1,29 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterOverridePolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterOverridePolicy","metadata":{"annotations":{},"name":"non-npu-vcjob-node-affinity"},"spec":{"overrideRules":[{"overriders":{"plaintext":[{"operator":"add","path":"/spec/tasks/0/template/spec/affinity","value":{"nodeAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"preference":{"matchExpressions":[{"key":"accelerator/huawei-npu","operator":"DoesNotExist"}]},"weight":100}]}}}]},"targetCluster":{"clusterNames":["001"]}}],"resourceSelectors":[{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchExpressions":[{"key":"huawei.com/ascend-1980","operator":"DoesNotExist"},{"key":"huawei.com/ascend-310","operator":"DoesNotExist"}]}}]}}
+  name: non-npu-vcjob-node-affinity
+spec:
+  overrideRules:
+  - overriders:
+      plaintext:
+      - operator: add
+        path: /spec/tasks/0/template/spec/affinity
+        value:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: accelerator/huawei-npu
+                  operator: DoesNotExist
+    targetCluster:
+      clusterNames:
+      - "001"
+  resourceSelectors:
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: huawei.com/npu
+        operator: DoesNotExist

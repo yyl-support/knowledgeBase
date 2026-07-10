@@ -1,0 +1,35 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"wlcb-pod-policy"},"spec":{"conflictResolution":"Abort","placement":{"clusterAffinity":{"clusterNames":["wlcb"]}},"preemption":"Never","priority":100,"resourceSelectors":[{"apiVersion":"v1","kind":"Pod","labelSelector":{"matchLabels":{"dispatch/wlcb":"true"}}},{"apiVersion":"batch/v1","kind":"Job","labelSelector":{"matchLabels":{"dispatch/wlcb":"true"}}},{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchLabels":{"dispatch/wlcb":"true"}}}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 6c74162e-62ea-4b02-a9e2-023820de3aae
+  name: wlcb-pod-policy
+spec:
+  conflictResolution: Abort
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - wlcb
+  preemption: Never
+  priority: 100
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Pod
+    labelSelector:
+      matchLabels:
+        dispatch/wlcb: "true"
+  - apiVersion: batch/v1
+    kind: Job
+    labelSelector:
+      matchLabels:
+        dispatch/wlcb: "true"
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchLabels:
+        dispatch/wlcb: "true"
+  schedulerName: default-scheduler

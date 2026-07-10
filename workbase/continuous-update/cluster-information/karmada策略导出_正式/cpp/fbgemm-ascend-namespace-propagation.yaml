@@ -1,0 +1,26 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"fbgemm-ascend-namespace-propagation"},"spec":{"conflictResolution":"Overwrite","placement":{"clusterAffinity":{"clusterNames":["001","wlcb"]},"replicaScheduling":{"replicaSchedulingType":"Duplicated"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"v1","kind":"Namespace","name":"fbgemm-ascend"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 2f755f1d-a05d-4bf1-a15d-316a44943aaf
+  name: fbgemm-ascend-namespace-propagation
+spec:
+  conflictResolution: Overwrite
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+      - wlcb
+    replicaScheduling:
+      replicaSchedulingType: Duplicated
+  preemption: Never
+  priority: 0
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Namespace
+    name: fbgemm-ascend
+  schedulerName: default-scheduler

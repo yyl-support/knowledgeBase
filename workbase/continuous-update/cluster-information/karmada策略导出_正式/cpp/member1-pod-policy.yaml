@@ -1,0 +1,35 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"member1-pod-policy"},"spec":{"conflictResolution":"Abort","placement":{"clusterAffinity":{"clusterNames":["001"]}},"priority":100,"resourceSelectors":[{"apiVersion":"v1","kind":"Pod","labelSelector":{"matchLabels":{"dispatch/001":"true"}}},{"apiVersion":"batch/v1","kind":"Job","labelSelector":{"matchLabels":{"dispatch/001":"true"}}},{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchLabels":{"dispatch/001":"true"}}}]}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 13edc537-2823-4055-bb73-9b40b4a60e70
+  name: member1-pod-policy
+spec:
+  conflictResolution: Abort
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+  preemption: Never
+  priority: 100
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Pod
+    labelSelector:
+      matchLabels:
+        dispatch/001: "true"
+  - apiVersion: batch/v1
+    kind: Job
+    labelSelector:
+      matchLabels:
+        dispatch/001: "true"
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchLabels:
+        dispatch/001: "true"
+  schedulerName: default-scheduler

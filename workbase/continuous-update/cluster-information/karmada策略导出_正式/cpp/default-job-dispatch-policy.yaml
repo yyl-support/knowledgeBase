@@ -1,0 +1,40 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"default-job-dispatch-policy"},"spec":{"conflictResolution":"Abort","placement":{"clusterAffinity":{"clusterNames":["001","wlcb"]},"replicaScheduling":{"replicaDivisionPreference":"Aggregated","replicaSchedulingType":"Divided"}},"preemption":"Never","priority":10,"resourceSelectors":[{"apiVersion":"batch/v1","kind":"Job","labelSelector":{"matchExpressions":[{"key":"dispatch/001","operator":"DoesNotExist"},{"key":"dispatch/wlcb","operator":"DoesNotExist"}]}},{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchExpressions":[{"key":"dispatch/001","operator":"DoesNotExist"},{"key":"dispatch/wlcb","operator":"DoesNotExist"}]}}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 1e9e3122-20a0-46f5-8129-5a68ae56cc64
+  name: default-job-dispatch-policy
+spec:
+  conflictResolution: Abort
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+      - wlcb
+    replicaScheduling:
+      replicaDivisionPreference: Aggregated
+      replicaSchedulingType: Divided
+  preemption: Never
+  priority: 10
+  resourceSelectors:
+  - apiVersion: batch/v1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: dispatch/001
+        operator: DoesNotExist
+      - key: dispatch/wlcb
+        operator: DoesNotExist
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: dispatch/001
+        operator: DoesNotExist
+      - key: dispatch/wlcb
+        operator: DoesNotExist
+  schedulerName: default-scheduler

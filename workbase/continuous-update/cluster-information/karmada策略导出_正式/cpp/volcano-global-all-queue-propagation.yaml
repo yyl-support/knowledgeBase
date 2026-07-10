@@ -1,0 +1,22 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"labels":{"resourcetemplate.karmada.io/deletion-protected":"Always"},"name":"volcano-global-all-queue-propagation"},"spec":{"conflictResolution":"Overwrite","placement":{"replicaScheduling":{"replicaSchedulingType":"Duplicated"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"scheduling.volcano.sh/v1beta1","kind":"Queue"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: d9a1787d-6249-498d-8c32-26dee2dde429
+    resourcetemplate.karmada.io/deletion-protected: Always
+  name: volcano-global-all-queue-propagation
+spec:
+  conflictResolution: Overwrite
+  placement:
+    replicaScheduling:
+      replicaSchedulingType: Duplicated
+  preemption: Never
+  priority: 0
+  resourceSelectors:
+  - apiVersion: scheduling.volcano.sh/v1beta1
+    kind: Queue
+  schedulerName: default-scheduler

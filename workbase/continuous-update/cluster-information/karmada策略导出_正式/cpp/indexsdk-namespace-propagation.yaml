@@ -1,0 +1,26 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterPropagationPolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterPropagationPolicy","metadata":{"annotations":{},"name":"indexsdk-namespace-propagation"},"spec":{"conflictResolution":"Overwrite","placement":{"clusterAffinity":{"clusterNames":["001","wlcb"]},"replicaScheduling":{"replicaSchedulingType":"Duplicated"}},"preemption":"Never","priority":0,"resourceSelectors":[{"apiVersion":"v1","kind":"Namespace","name":"indexsdk"}],"schedulerName":"default-scheduler"}}
+  finalizers:
+  - karmada.io/cluster-propagation-policy-controller
+  labels:
+    clusterpropagationpolicy.karmada.io/permanent-id: 6d92ac61-dfc4-4b4b-85d8-163a5a57c92c
+  name: indexsdk-namespace-propagation
+spec:
+  conflictResolution: Overwrite
+  placement:
+    clusterAffinity:
+      clusterNames:
+      - "001"
+      - wlcb
+    replicaScheduling:
+      replicaSchedulingType: Duplicated
+  preemption: Never
+  priority: 0
+  resourceSelectors:
+  - apiVersion: v1
+    kind: Namespace
+    name: indexsdk
+  schedulerName: default-scheduler

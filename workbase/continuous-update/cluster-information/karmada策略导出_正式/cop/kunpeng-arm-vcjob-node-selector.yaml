@@ -1,0 +1,26 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: ClusterOverridePolicy
+metadata:
+  annotations:
+      {"apiVersion":"policy.karmada.io/v1alpha1","kind":"ClusterOverridePolicy","metadata":{"annotations":{},"name":"kunpeng-arm-vcjob-node-selector"},"spec":{"overrideRules":[{"overriders":{"plaintext":[{"operator":"replace","path":"/spec/tasks/0/template/spec/nodeSelector","value":{"kunpeng-arm":"true"}}]}}],"resourceSelectors":[{"apiVersion":"batch.volcano.sh/v1alpha1","kind":"Job","labelSelector":{"matchExpressions":[{"key":"huawei.com/npu","operator":"DoesNotExist"},{"key":"kubernetes.io/arch","operator":"In","values":["arm64","arm"]}]}}]}}
+  name: kunpeng-arm-vcjob-node-selector
+spec:
+  overrideRules:
+  - overriders:
+      plaintext:
+      - operator: replace
+        path: /spec/tasks/0/template/spec/nodeSelector
+        value:
+          kunpeng-arm: "true"
+  resourceSelectors:
+  - apiVersion: batch.volcano.sh/v1alpha1
+    kind: Job
+    labelSelector:
+      matchExpressions:
+      - key: huawei.com/npu
+        operator: DoesNotExist
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+        - arm64
+        - arm
